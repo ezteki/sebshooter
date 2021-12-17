@@ -1,3 +1,4 @@
+import json
 import os
 
 from kafka import KafkaProducer
@@ -29,5 +30,6 @@ class KafkaShooter(Shooter):
         self.shooter = KafkaProducer(**config)
 
     def shoot(self, key, data):
-        print(type(data))
-        self.shooter.send(topic=self.topic, key=bytes(str(key).encode()), value=bytes(str(data).encode()))
+        self.shooter.send(topic=self.topic,
+                          key=bytes(str(key).encode()),
+                          value=bytes(json.dumps(data).encode()))

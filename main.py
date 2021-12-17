@@ -1,12 +1,10 @@
-import logging
 import os
+from datetime import datetime
 
 import salt.config
 import salt.utils.event
 
 from clients.factory import ShooterFactory
-
-logger = logging.getLogger()
 
 SHOOTER = os.environ.get('SHOOTER', 'KAFKA')
 
@@ -23,5 +21,5 @@ if __name__ == '__main__':
         if result is None:
             continue
 
-        logger.info(result)
+        current_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S.%f')
         shooter.shoot(data=result)
