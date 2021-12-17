@@ -1,20 +1,21 @@
 import json
-import os
 
 from kafka import KafkaProducer
 
+from clients.config import KAFKA_TOPIC, KAFKA_AUTH_PASSWORD, KAFKA_FALLBACK_RETRY, KAFKA_AUTH_USER, \
+    KAFKA_BOOTSTRAP_SERVERS, KAFKA_SASL_MECHANISM, KAFKA_SECURITY_PROTOCOL
 from clients.shooter import Shooter
 
 
 class KafkaShooter(Shooter):
     def __init__(self):
-        self.bootstrap_servers = os.environ.get('KAFKA_BOOTSTRAP_SERVERS', 'localhost')
-        self.fallback_retry = os.environ.get('KAFKA_FALLBACK_RETRY', 5)
-        self.username = os.environ.get('KAFKA_AUTH_USER')
-        self.password = os.environ.get('KAFKA_AUTH_PASSWORD')
-        self.protocol = os.environ.get('KAFKA_SECURITY_PROTOCOL', 'SASL_PLAINTEXT')
-        self.mechanism = os.environ.get('KAFKA_SASL_MECHANISM', 'PLAIN')
-        self.topic = os.environ.get('KAFKA_TOPIC', 'es-k8s-test')
+        self.bootstrap_servers = KAFKA_BOOTSTRAP_SERVERS or 'localhost'
+        self.fallback_retry = KAFKA_FALLBACK_RETRY or 5
+        self.username = KAFKA_AUTH_USER
+        self.password = KAFKA_AUTH_PASSWORD
+        self.protocol = KAFKA_SECURITY_PROTOCOL
+        self.mechanism = KAFKA_SASL_MECHANISM
+        self.topic = KAFKA_TOPIC
         self.shooter = None
 
     def init_shooter(self):
