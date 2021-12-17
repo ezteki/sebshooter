@@ -8,6 +8,8 @@ class ShooterFactory(object):
 
     def get_shooter(self, t: str = 'KAFKA'):
         try:
-            return self.MAPPING[t]().init_shooter()
+            shooter = self.MAPPING[t]()
+            shooter.init_shooter()
+            return shooter
         except KeyError:
             raise ModuleNotFoundError(f'{t} 类型的 Shooter 暂不支持')
