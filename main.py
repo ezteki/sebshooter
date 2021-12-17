@@ -22,4 +22,5 @@ if __name__ == '__main__':
         if result is None:
             continue
 
+        logger.info(result)
         shooter.shoot(data=result)

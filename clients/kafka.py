@@ -12,6 +12,7 @@ class KafkaShooter(Shooter):
         self.username = os.environ.get('KAFKA_AUTH_USER')
         self.password = os.environ.get('KAFKA_AUTH_PASSWORD')
         self.mechanism = os.environ.get('KAFKA_SASL_MECHANISM', 'SASL_PLAINTEXT')
+        self.topic = os.environ.get('KAFKA_TOPIC', 'es-k8s-test')
         self.shooter = None
 
     def init_shooter(self):
@@ -26,4 +27,4 @@ class KafkaShooter(Shooter):
         self.shooter = KafkaProducer(**config)
 
     def shoot(self, data):
-        print(data)
+        self.shooter.send(self.topic, data)
