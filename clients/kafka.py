@@ -1,4 +1,5 @@
 import os
+
 from kafka import KafkaProducer
 
 from clients.shooter import Shooter
@@ -27,5 +28,6 @@ class KafkaShooter(Shooter):
         }
         self.shooter = KafkaProducer(**config)
 
-    def shoot(self, data):
-        self.shooter.send(self.topic, data)
+    def shoot(self, key, data):
+        print(type(data))
+        self.shooter.send(topic=self.topic, key=bytes(str(key).encode()), value=bytes(str(data).encode()))
