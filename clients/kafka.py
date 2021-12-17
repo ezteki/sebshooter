@@ -24,6 +24,7 @@ class KafkaShooter(Shooter):
             'sasl_plain_username': self.username,
             'sasl_plain_password': self.password
         }
+        print(config)
         self.shooter = KafkaProducer(**config)
 
     def shoot(self, data):
