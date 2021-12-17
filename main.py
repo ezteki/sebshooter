@@ -17,6 +17,7 @@ if __name__ == '__main__':
     factory = ShooterFactory()
     shooter = factory.get_shooter(t=SHOOTER)
 
+    shooter.shoot(data={"a": 1})
     while True:
         result = event.get_event(full=True)
         if result is None:
