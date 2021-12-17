@@ -21,4 +21,5 @@ if __name__ == '__main__':
             continue
 
         current_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S.%f')
+        print(f'{SHOOTER.lower()} shooter: {current_time} --- {result}')
         shooter.shoot(key="saltstack", data=result)
