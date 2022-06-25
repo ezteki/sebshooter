@@ -1,2 +1,2 @@
 kafka-python==2.0.2
-salt==3004
+salt==3004.2
